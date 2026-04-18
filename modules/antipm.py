@@ -52,14 +52,15 @@ async def anti_pm_handler(client: Client, message: Message):
     u_f = user.first_name
     default_text = db.get("core.antipm", "antipm_msg", None)
     if default_text is None:
-        default_text = f"""<b>Hello, {u_f}!
-This is the Assistant Of {u_n}.</b>
-<i>My Boss is away or busy as of now, You can wait for him to respond.
-Do not spam further messages else I may have to block you!</i>
+        default_text = f"""Hello {u_f},
 
-<b>This is an automated message by the assistant.</b>
-<b><u>Currently You Have <code>{USER_WARNINGS.get(user_id, 0)}</code> Warnings.</u></b>
-    """
+This is an automated message from <a href="https://vaibhavsatpute.xo.je">{u_n}</a>'s assistant bot.
+
+Please avoid spamming. If I am online, I will respond to you. Continued messaging without waiting for a reply may result in a block.
+
+You currently have {USER_WARNINGS.get(user_id, 0)} warning(s).
+
+Thank you for your cooperation."""
     else:
         default_text = default_text.format(
             user=u_f, my_name=u_n, warns=USER_WARNINGS.get(user_id, 0)
